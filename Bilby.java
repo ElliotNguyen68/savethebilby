@@ -6,7 +6,7 @@ class Bilby extends Animal {
     static int id_int=0;
 
     boolean check_id(String id){
-        Pattern pattern=Pattern.compile("^(B|F|C)[0-9]{3}$");
+        Pattern pattern=Pattern.compile("^B[0-9]{3}$");
         Matcher matcher = pattern.matcher(id);
         boolean found=matcher.find();
         if (! found){
@@ -23,17 +23,6 @@ class Bilby extends Animal {
         this.id=String.format("B%03d",  tmp_id);
         this.is_alive = true;
         this.giving_birth_prob = 0.15; 
-    }
-
-    public Bilby(String predator_type,int id_id){
-        if (predator_type=="Fox"){
-            this.id=String.format("F%03d",id_id);
-        }
-        else{
-            this.id=String.format("C%03d",id_id);
-        }
-        this.is_alive = true;
-        this.giving_birth_prob = 0.15;  
     }
      
     public Bilby(String id) {
@@ -114,12 +103,58 @@ class Bilby extends Animal {
         }  ; 
         this.giving_birth_prob=giving_birth_prob;
     }
+    private void test(){
+        System.out.println("Create a Bilby object with the default constructor");
+        Bilby b1=new Bilby();
+        System.out.println(b1);
+
+
+        System.out.println("Create a Bilby object with the non-default constructor with valid field values");
+        Bilby b2=new Bilby("B005",0.14);
+        System.out.println(b2); 
+
+        // System.out.println("Create a Bilby object with the non-default constructor with invalid field values");
+        // Bilby b3=new Bilby("C005",0.14);
+
+        // System.out.println("Create a Bilby object with the non-default constructor with invalid field values");
+        // Bilby b4=new Bilby("C005",1.1);
+
+        System.out.print("Test get_id() method: ");
+        System.out.println(b1.get_id());
+        
+        System.out.print("Test get_giving_birth_prob() method: ");
+        System.out.println(b1.get_giving_birth_prob());
+
+        System.out.print("Test set_id() method with valid id: ");
+        b1.set_id("B000");
+        System.out.println(b1.get_id());
+
+        System.out.print("Test set_giving_birth_prob() method with valid value: ");
+        b1.set_giving_birth_prob(.19);
+        System.out.println(b1.get_giving_birth_prob());
+
+        // System.out.print("Test set_id() method with invalid id: ");
+        // b1.set_id("C000");
+        // System.out.println(b1.get_id());
+
+        // System.out.print("Test set_giving_birth_prob() method with invalid value: ");
+        // b1.set_giving_birth_prob(1.1);
+        // System.out.println(b1.get_giving_birth_prob());
+
+        
+
+ 
+
+ 
+
+        
+
+
+    }
 
     public static void main(String[] args) {
-        Bilby bilby_0=new Bilby();
-        System.out.println(bilby_0);
-        Bilby bilby_2=new Bilby();
-        System.out.println(bilby_2);
+        Bilby bilby=new Bilby();
+        bilby.test();
          
         // Bilby bilby_1=new Bilby("B123");
         // System.out.println(bilby_1);
