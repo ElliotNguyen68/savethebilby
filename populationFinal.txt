@@ -1,0 +1,76 @@
+============ Population details at each location =========
+-------Location 1th-------
+Alive 
+bilby: 0, cat: 4, fox: 5 
+New born 
+bilby: 1, cat: 1, fox: 1 
+Have died 
+bilby: 6, cat: 0, fox: 0 
+-------Location 2th-------
+Alive 
+bilby: 5, cat: 5, fox: 1 
+New born 
+bilby: 1, cat: 2, fox: 0 
+Have died 
+bilby: 6, cat: 0, fox: 0 
+-------Location 3th-------
+Alive 
+bilby: 0, cat: 9, fox: 1 
+New born 
+bilby: 3, cat: 4, fox: 0 
+Have died 
+bilby: 7, cat: 0, fox: 0 
+-------Location 4th-------
+Alive 
+bilby: 16, cat: 3, fox: 1 
+New born 
+bilby: 6, cat: 0, fox: 0 
+Have died 
+bilby: 2, cat: 0, fox: 0 
+-------Location 5th-------
+Alive 
+bilby: 7, cat: 4, fox: 6 
+New born 
+bilby: 5, cat: 1, fox: 1 
+Have died 
+bilby: 12, cat: 0, fox: 0 
+-------Location 6th-------
+Alive 
+bilby: 6, cat: 4, fox: 4 
+New born 
+bilby: 2, cat: 0, fox: 0 
+Have died 
+bilby: 4, cat: 0, fox: 0 
+-------Location 7th-------
+Alive 
+bilby: 9, cat: 6, fox: 2 
+New born 
+bilby: 5, cat: 1, fox: 1 
+Have died 
+bilby: 10, cat: 0, fox: 0 
+-------Location 8th-------
+Alive 
+bilby: 0, cat: 6, fox: 1 
+New born 
+bilby: 0, cat: 2, fox: 0 
+Have died 
+bilby: 3, cat: 0, fox: 0 
+-------Location 9th-------
+Alive 
+bilby: 18, cat: 3, fox: 5 
+New born 
+bilby: 9, cat: 0, fox: 1 
+Have died 
+bilby: 46, cat: 0, fox: 0 
+-------Location 10th-------
+Alive 
+bilby: 5, cat: 1, fox: 2 
+New born 
+bilby: 1, cat: 0, fox: 0 
+Have died 
+bilby: 3, cat: 0, fox: 0 
+============ Bilby population change =========
+Bilby at the start: 132, end: 66, change rate: -50% 
+============ Bilby population stability factor =========
+BilBy new birth: 33, dead: 99 stability factor 100%============ Predator population change =========
+Predator at the end: 73, start: 58 change rate: 25%
