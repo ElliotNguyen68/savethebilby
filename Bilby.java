@@ -141,14 +141,6 @@ class Bilby extends Animal {
         // b1.set_giving_birth_prob(1.1);
         // System.out.println(b1.get_giving_birth_prob());
 
-        
-
- 
-
- 
-
-        
-
 
     }
 

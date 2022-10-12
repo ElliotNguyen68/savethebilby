@@ -21,7 +21,22 @@ class Predator extends Bilby {
         this.type = type;
         this.health = 3;
     }
+    
+    public Predator(String type,double giving_birth_prob,double eat_prob) {
+        assert (type =="Fox" | type =="Cat");
+        if (type == "Fox") {
+            this.id=String.format("F%03d", Predator.id_int);
+        } else {
+            this.id=String.format("C%03d", Predator.id_int);
 
+        }
+        this.giving_birth_prob=giving_birth_prob;
+        this.eat_prob=eat_prob;
+        this.type = type;
+        this.health = 3;
+    }
+
+    
     public boolean eatable_now() {
         // this funciton will check for an animal will eat in this month
         // check for living status

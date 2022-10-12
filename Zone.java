@@ -40,11 +40,11 @@ class Zone {
             this.list_bilby.add(new_bilby);
         }
         for (int i = 0; i < this.num_cat; i++) {
-            Predator new_cat = new Predator("Cat");
+            Predator new_cat = new Cat();
             this.list_cat.add(new_cat);
         }
         for (int i = 0; i < this.num_fox; i++) {
-            Predator new_fox = new Predator("Fox");
+            Predator new_fox = new Fox();
             this.list_fox.add(new_fox);
         }
 
