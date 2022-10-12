@@ -1,5 +1,13 @@
 # Save The BilBy 
 ## How to run
+
+
+```bash
+# clone project 
+git clone https://github.com/ElliotNguyen68/savethebilby.git
+```
+
+
 ```bash
 # Run entire project
 javac SaveTheBilby.java && java SaveTheBilby
@@ -9,4 +17,5 @@ javac SaveTheBilby.java && java SaveTheBilby
 # Run test BilBy class only
 javac Bilby.java && java -ea Bilby
 ```
+
 
