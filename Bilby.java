@@ -3,6 +3,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Bilby extends Animal {
+    // using this static variable to create incremental id, whenever an object belong to Bilby class or extended from Bilby class is instanced, this variable will increased by 1.
     static int id_int=0;
 
     boolean check_id(String id){
@@ -19,6 +20,7 @@ class Bilby extends Animal {
 
     public Bilby(){
         int tmp_id =Bilby.id_int+1;
+        // where the increasing happens.
         Bilby.id_int+=1;
         this.id=String.format("B%03d",  tmp_id);
         this.is_alive = true;
