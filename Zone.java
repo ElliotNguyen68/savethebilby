@@ -36,7 +36,7 @@ class Zone {
     public void init_animal() {
         // this function aim to init animal in zone.
         for (int i = 0; i < this.num_bilby; i++) {
-            Animal new_bilby = new Bilby();
+            Animal new_bilby = new Animal();
             this.list_bilby.add(new_bilby);
         }
         for (int i = 0; i < this.num_cat; i++) {
@@ -89,7 +89,7 @@ class Zone {
         if (type == "Bilby") {
             tmp = this.list_bilby;
             for (int i = 0; i < number; i++) {
-                Animal new_bilby = new Bilby();
+                Animal new_bilby = new Animal();
                 this.list_bilby.add(new_bilby);
             }
             this.num_bilby_so_far += number;

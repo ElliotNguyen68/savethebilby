@@ -1,10 +1,7 @@
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Bilby extends Animal {
-    // using this static variable to create incremental id, whenever an object belong to Bilby class or extended from Bilby class is instanced, this variable will increased by 1.
-    static int id_int=0;
+public class Bilby extends Animal{
 
     boolean check_id(String id){
         Pattern pattern=Pattern.compile("^B[0-9]{3}$");
@@ -19,10 +16,7 @@ class Bilby extends Animal {
     }
 
     public Bilby(){
-        int tmp_id =Bilby.id_int+1;
-        // where the increasing happens.
-        Bilby.id_int+=1;
-        this.id=String.format("B%03d",  tmp_id);
+        this.id=String.format("B%03d",  Bilby.id_int);
         this.is_alive = true;
         this.giving_birth_prob = 0.15; 
     }
@@ -97,14 +91,7 @@ class Bilby extends Animal {
         }
         this.id=id; 
     }
-    public void set_giving_birth_prob(double giving_birth_prob){
-        if(giving_birth_prob<0| giving_birth_prob>1){
-            // assertTrue("Not a valid giving birth probability!", false);
-            assert false :"Not a valid giving birth probability!" ;
- 
-        }  ; 
-        this.giving_birth_prob=giving_birth_prob;
-    }
+
     private void test(){
         System.out.println("Create a Bilby object with the default constructor");
         Bilby b1=new Bilby();
@@ -135,6 +122,8 @@ class Bilby extends Animal {
         b1.set_giving_birth_prob(.19);
         System.out.println(b1.get_giving_birth_prob());
 
+        Bilby b3=new Bilby();
+        System.out.println(b3);
         // System.out.print("Test set_id() method with invalid id: ");
         // b1.set_id("C000");
         // System.out.println(b1.get_id());
@@ -154,5 +143,5 @@ class Bilby extends Animal {
         // System.out.println(bilby_1);
         // Bilby bilby_2=new Bilby("B123", 0.9);
         // System.out.println(bilby_2);
-    }
+        }
 }

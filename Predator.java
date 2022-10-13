@@ -1,5 +1,5 @@
 // Predator inherit from Bilby, so Predator object can use method and attribute of Bilby class, furthermore, it has it's own method and attribute.
-class Predator extends Bilby {
+class Predator extends Animal {
     public int health;
     public double eat_prob;
     public String type;
@@ -81,7 +81,7 @@ class Predator extends Bilby {
         System.out.println(b);
         Predator c=new Predator("Fox");
         System.out.println(c);
-        Bilby e=new Bilby();
+        Animal e=new Animal();
         System.out.println(e);
     }
 }
