@@ -55,17 +55,8 @@ public class Bilby extends Animal{
     }
 
 
-    @Override
-    boolean giving_birth_now() {
-        // TODO Auto-generated method stub
-        if (this.is_alive == false) {
-            return false;
-        }
-        return Math.random() <= this.giving_birth_prob;
-    }
-
     public String toString() {
-        return (String.format("id: %s, is_alive: %b, giving_birth_prob: %,.3f", this.id, this.is_alive,this.giving_birth_prob));
+        return (String.format("Bilby, id: %s, is_alive: %b, giving_birth_prob: %,.3f", this.id, this.is_alive,this.giving_birth_prob));
     }
 
     public String get_id(){

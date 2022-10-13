@@ -15,4 +15,11 @@ public class Fox extends Predator{
                 this.health));
     }
     // public Fox(g)
+    public static void main(String[] args) {
+        Fox f1=new Fox();
+        System.out.println(f1);
+        Fox f2=new Fox();
+        System.out.println(f2);
+         
+    }
 }
