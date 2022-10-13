@@ -1,4 +1,4 @@
-
+// Predator inherit from Bilby, so Predator object can use method and attribute of Bilby class, furthermore, it has it's own method and attribute.
 class Predator extends Bilby {
     public int health;
     public double eat_prob;

@@ -1,3 +1,5 @@
+// Fox will have all attribute and method of Predator
+
 public class Fox extends Predator{
     public Fox(){
         super("Fox");
