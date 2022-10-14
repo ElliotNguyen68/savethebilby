@@ -120,7 +120,7 @@ class ManageConservationist {
                 System.out.println("Enter 2 location and amount bilby to relocate");
 
                 int zone_num1=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "1st location (from):"));
-                int zone_num2=Integer.valueOf(InputValidator.get_input("^([0-9])*$", "2nd location (to):"));
+                int zone_num2=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "2nd location (to):"));
                 
 
                 int amount=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "Amount: "));
