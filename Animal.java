@@ -10,7 +10,7 @@ abstract class Animal {
         Animal.id_int+=1;
         this.is_alive=true;
     }
-
+     
     void force_die() {
         this.is_alive = false;
     }
@@ -41,10 +41,7 @@ abstract class Animal {
     }
 
     public void set_giving_birth_prob(double giving_birth_prob){
-        if(giving_birth_prob<0| giving_birth_prob>1){
-            // assertTrue("Not a valid giving birth probability!", false);
-            assert false :"Not a valid giving birth probability!" ;
-        }  ; 
+        assert(giving_birth_prob>=0 && giving_birth_prob<=1) :"Not a valid giving birth probability!" ; 
         this.giving_birth_prob=giving_birth_prob;
     }
 }

@@ -42,7 +42,8 @@ class Predator extends Animal {
             this.id=String.format("C%03d", Predator.id_int);
 
         }
-        this.giving_birth_prob=giving_birth_prob;
+        this.set_giving_birth_prob(giving_birth_prob);
+        assert(eat_prob>=0 && eat_prob<=1) :"Not a valid giving eat probability!" ; 
         this.eat_prob=eat_prob;
         this.type = type;
         this.health = 3;
