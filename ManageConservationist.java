@@ -67,11 +67,22 @@ class ManageConservationist {
     }
 
     public boolean check_amount_bilby(int zone_num,int amount,boolean sub_from){
-        this.list_zones[zone_num].update_status(); 
+        // this.list_zones[zone_num].update_status(); 
+        boolean check;
         if (sub_from){
-            return this.list_zones[zone_num].num_bilby>=amount;
+
+            check= this.list_zones[zone_num].num_bilby>=amount;
+            if (! check){
+                System.out.println(String.format("Can not get %d from %d", amount,this.list_zones[zone_num].num_bilby));
+                return check;
+            }
         }
-        return this.list_zones[zone_num].num_bilby+amount<=this.limit_bilby;
+
+        check= this.list_zones[zone_num].num_bilby+amount<=this.limit_bilby;
+        if (!check){
+            System.out.println(String.format("%d + %d is over limit %d", this.list_zones[zone_num].num_bilby,amount,this.limit_bilby));
+        }
+        return check;
     }
 
     public boolean relocate_2_zone(int zone_num1,int zone_num2, int amount){
