@@ -1,5 +1,5 @@
-
-class Predator extends Bilby {
+// Predator inherit from Bilby, so Predator object can use method and attribute of Bilby class, furthermore, it has it's own method and attribute.
+class Predator extends Animal {
     public int health;
     public double eat_prob;
     public String type;
@@ -21,7 +21,35 @@ class Predator extends Bilby {
         this.type = type;
         this.health = 3;
     }
+    
+    public int getHealth() {
+        return health;
+    }
 
+    public double getEat_prob() {
+        return eat_prob;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Predator(String type,double giving_birth_prob,double eat_prob) {
+        assert (type =="Fox" | type =="Cat");
+        if (type == "Fox") {
+            this.id=String.format("F%03d", Predator.id_int);
+        } else {
+            this.id=String.format("C%03d", Predator.id_int);
+
+        }
+        this.set_giving_birth_prob(giving_birth_prob);
+        assert(eat_prob>=0 && eat_prob<=1) :"Not a valid giving eat probability!" ; 
+        this.eat_prob=eat_prob;
+        this.type = type;
+        this.health = 3;
+    }
+
+    
     public boolean eatable_now() {
         // this funciton will check for an animal will eat in this month
         // check for living status
@@ -66,7 +94,7 @@ class Predator extends Bilby {
         System.out.println(b);
         Predator c=new Predator("Fox");
         System.out.println(c);
-        Bilby e=new Bilby();
+        Animal e=new Bilby();
         System.out.println(e);
     }
 }

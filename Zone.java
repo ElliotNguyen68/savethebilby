@@ -7,9 +7,15 @@ class Zone {
     int num_fox;
     int num_cat;
     int num_bilby;
-    int num_cat_so_far;
-    int num_bilby_so_far;
-    int num_fox_so_far;
+
+    int born_bilby;
+    int born_fox;
+    int born_cat;
+
+    int dead_bilby;
+    int dead_fox;
+    int dead_cat;
+    
     int init_bilby;
     int init_fox;
     int init_cat;
@@ -23,10 +29,12 @@ class Zone {
         this.num_fox = num_fox;
         this.num_cat = num_cat;
         this.zone_number = zone_number;
-        // alive + dead + new born
-        this.num_bilby_so_far = this.num_bilby;
-        this.num_fox_so_far = this.num_fox;
-        this.num_cat_so_far = this.num_cat;
+        
+        // dead
+        this.dead_bilby = num_bilby;
+        this.dead_fox = num_fox;
+        this.dead_cat = num_cat;
+
         // init-start
         this.init_bilby=num_bilby;
         this.init_cat=num_cat;
@@ -40,11 +48,11 @@ class Zone {
             this.list_bilby.add(new_bilby);
         }
         for (int i = 0; i < this.num_cat; i++) {
-            Predator new_cat = new Predator("Cat");
+            Predator new_cat = new Cat();
             this.list_cat.add(new_cat);
         }
         for (int i = 0; i < this.num_fox; i++) {
-            Predator new_fox = new Predator("Fox");
+            Predator new_fox = new Fox();
             this.list_fox.add(new_fox);
         }
 
@@ -53,27 +61,43 @@ class Zone {
     public void update_status() {
         // this function will update number of alive individual per species, after a month
         int num_bilby = 0;
+        int num_bilby_dead = 0;
         for (Animal animal : this.list_bilby) {
             if (animal.is_alive) {
                 num_bilby += 1;
             }
+            else{
+
+                num_bilby_dead+=1;
+            }
         }
+        this.dead_bilby=num_bilby_dead;
         this.num_bilby = num_bilby;
 
         int num_cat = 0;
+        int num_cat_dead=0;
         for (Animal animal : this.list_cat) {
             if (animal.is_alive) {
                 num_cat += 1;
             }
+            else{
+                num_cat_dead+=1;
+            }
         }
+        this.dead_cat=num_cat_dead;
         this.num_cat = num_cat;
 
         int num_fox = 0;
+        int num_fox_dead = 0;
         for (Animal animal : list_fox) {
             if (animal.is_alive) {
                 num_fox += 1;
             }
+            else{
+                num_fox_dead+=1;
+            }
         }
+        this.dead_fox=num_fox_dead;
         this.num_fox = num_fox;
 
     }
@@ -85,33 +109,25 @@ class Zone {
 
     public void generate_new_animal(String type, int number) {
         // Given animal type, with a number of new one, add new #number animals of type to list animal of this zone.
-        ArrayList<Animal> tmp;
+        ArrayList<Animal> tmp ;
         if (type == "Bilby") {
             tmp = this.list_bilby;
             for (int i = 0; i < number; i++) {
                 Animal new_bilby = new Bilby();
                 this.list_bilby.add(new_bilby);
             }
-            this.num_bilby_so_far += number;
+            // this.num_bilby_so_far += number;
             return;
         }
-        int number_this_type_so_far;
         if (type == "Fox") {
-            number_this_type_so_far = this.num_fox_so_far;
             tmp = this.list_fox;
         } else {
             tmp = this.list_cat;
-            number_this_type_so_far = this.num_cat_so_far;
         }
+        
         for (int i = 0; i < number; i++) {
             Animal new_type = new Predator(type);
             tmp.add(new_type);
-        }
-        number_this_type_so_far += number;
-        if (type == "Fox") {
-            this.num_fox_so_far = number_this_type_so_far;
-        } else {
-            this.num_cat_so_far = number_this_type_so_far;
         }
     }
 
@@ -138,12 +154,15 @@ class Zone {
         }
         if (num_new_bilby > 0) {
             this.generate_new_animal("Bilby", num_new_bilby);
+            this.born_bilby+=num_new_bilby;
         }
         if (num_new_cat > 0) {
             this.generate_new_animal("Cat", num_new_cat);
+            this.born_cat+=num_new_cat;
         }
         if (num_new_fox > 0) {
             this.generate_new_animal("Fox", num_new_fox);
+            this.born_fox+=num_new_fox;
         }
     }
 
@@ -193,10 +212,12 @@ class Zone {
     }
 
     public void one_month_process() {
+        // System.out.println("dafs");
         this.giving_birth();
         this.update_status();
         this.predator_hunting();
         this.update_health_all_predators();
+        this.update_status();
     }
 
     public void write_status() {
@@ -217,6 +238,7 @@ class Zone {
         list_predator.addAll(this.list_fox);
         for (Animal animal : list_predator) {
             ((Predator)animal).die_by_haft();
+            
         } 
     }
     

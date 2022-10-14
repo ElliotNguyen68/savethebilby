@@ -11,9 +11,43 @@ class ManageConservationist {
     private int limit_bilby=20;
     public int total_bilby_start=0;
 
+    public ManageConservationist(){}
+
+    public void setList_zones(Zone[] list_zones) {
+        this.list_zones = list_zones;
+    }
+
+    public void setNum_zones(int num_zones) {
+        this.num_zones = num_zones;
+    }
+
+    public void setLimit_bilby(int limit_bilby) {
+        this.limit_bilby = limit_bilby;
+    }
+
+    public void setTotal_bilby_start(int total_bilby_start) {
+        this.total_bilby_start = total_bilby_start;
+    }
+
     public ManageConservationist(int num_zones) {
         this.num_zones = num_zones;
         list_zones = new Zone[num_zones];
+    }
+
+    public Zone[] getList_zones() {
+        return list_zones;
+    }
+
+    public int getNum_zones() {
+        return num_zones;
+    }
+
+    public int getLimit_bilby() {
+        return limit_bilby;
+    }
+
+    public int getTotal_bilby_start() {
+        return total_bilby_start;
     }
 
     public void statistic() {
@@ -86,7 +120,7 @@ class ManageConservationist {
                 System.out.println("Enter 2 location and amount bilby to relocate");
 
                 int zone_num1=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "1st location (from):"));
-                int zone_num2=Integer.valueOf(InputValidator.get_input("^([0-9])*$", "2nd location (to):"));
+                int zone_num2=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "2nd location (to):"));
                 
 
                 int amount=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "Amount: "));
@@ -138,59 +172,61 @@ class ManageConservationist {
         try {
             FileWriter myWriter = new FileWriter("populationFinal.txt");
             System.out.println("============ Population details at each location =========");
-            myWriter.write("============ Population details at each location =========\n");
+            // myWriter.write("============ Population details at each location =========\n");
             for(Zone zone: this.list_zones){
                 zone.update_status();
                 System.out.println(String.format("-------Location %dth-------",zone.zone_number+1));
-                myWriter.write(String.format("-------Location %dth-------\n",zone.zone_number+1));
+                // myWriter.write(String.format("-------Location %dth-------\n",zone.zone_number+1));
 
                 System.out.println("Alive");
-                myWriter.write("Alive \n");
+                // myWriter.write("Alive \n");
 
                 System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.num_bilby,zone.num_cat,zone.num_fox));
-                myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby,zone.num_cat,zone.num_fox));
+                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby,zone.num_cat,zone.num_fox));
 
                 System.out.println("New born");
-                myWriter.write("New born \n");
+                // myWriter.write("New born \n");
 
-                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.num_bilby_so_far-zone.init_bilby,zone.num_cat_so_far-zone.init_cat,zone.num_fox_so_far-zone.init_fox));
-                myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby_so_far-zone.init_bilby,zone.num_cat_so_far-zone.init_cat,zone.num_fox_so_far-zone.init_fox));
+                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.born_bilby,zone.born_cat,zone.born_fox));
+                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby_so_far-zone.init_bilby,zone.num_cat_so_far-zone.init_cat,zone.num_fox_so_far-zone.init_fox));
 
                 System.out.println("Have died");
-                myWriter.write("Have died \n");
+                // myWriter.write("Have died \n");
 
-                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.num_bilby_so_far-zone.num_bilby,zone.num_cat_so_far-zone.num_cat,zone.num_fox_so_far-zone.num_fox));
-                myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby_so_far-zone.num_bilby,zone.num_cat_so_far-zone.num_cat,zone.num_fox_so_far-zone.num_fox));
+                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.dead_bilby,zone.dead_cat,zone.dead_fox));
+                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby_so_far-zone.num_bilby,zone.num_cat_so_far-zone.num_cat,zone.num_fox_so_far-zone.num_fox));
                 
+                myWriter.write(String.format("%d, %d, %d, %d, %d, %d \n", zone.num_bilby, zone.dead_bilby, 
+                zone.num_fox,zone.dead_fox,zone.num_cat, zone.dead_cat));
                 
                 total_bilby_end+=zone.num_bilby;
-                total_new_birth_bilby+=zone.num_bilby_so_far-zone.init_bilby;
-                total_death_bilby+=zone.num_bilby_so_far-zone.num_bilby;
+                total_new_birth_bilby+=zone.list_bilby.size()-zone.init_bilby;
+                total_death_bilby+=zone.dead_bilby;
                 total_init_bilby+=zone.init_bilby;
                 total_init_predator+=zone.init_fox+zone.init_cat;
                 total_predator_end+=zone.num_cat+zone.num_fox;
             }       
 
             System.out.println("============ Bilby population change =========");
-            myWriter.write("============ Bilby population change =========\n");
+            // myWriter.write("============ Bilby population change =========\n");
              
 
             System.out.println(String.format("Bilby at the start: %d, end: %d, change rate: %d%%", this.total_bilby_start,total_bilby_end,100*(total_bilby_end-this.total_bilby_start)/this.total_bilby_start));
-            myWriter.write(String.format("Bilby at the start: %d, end: %d, change rate: %d%% \n", this.total_bilby_start,total_bilby_end,100*(total_bilby_end-this.total_bilby_start)/this.total_bilby_start));
+            // myWriter.write(String.format("Bilby at the start: %d, end: %d, change rate: %d%% \n", this.total_bilby_start,total_bilby_end,100*(total_bilby_end-this.total_bilby_start)/this.total_bilby_start));
             
             
             System.out.println("============ Bilby population stability factor =========");
-            myWriter.write("============ Bilby population stability factor =========\n");
+            // myWriter.write("============ Bilby population stability factor =========\n");
 
 
             System.out.println(String.format("BilBy new birth: %d, dead: %d stability factor %d%%",total_new_birth_bilby,total_death_bilby, 100*(total_new_birth_bilby+total_death_bilby)/total_init_bilby));
-            myWriter.write(String.format("BilBy new birth: %d, dead: %d stability factor %d%%",total_new_birth_bilby,total_death_bilby, 100*(total_new_birth_bilby+total_death_bilby)/total_init_bilby));
+            // myWriter.write(String.format("BilBy new birth: %d, dead: %d stability factor %d%% \n",total_new_birth_bilby,total_death_bilby, 100*(total_new_birth_bilby+total_death_bilby)/total_init_bilby));
 
             System.out.println("============ Predator population change =========");
-            myWriter.write("============ Predator population change =========\n");
+            // myWriter.write("============ Predator population change =========\n");
            
             System.out.println(String.format("Predator at the end: %d, start: %d change rate: %d%%",total_predator_end,total_init_predator,100*(total_predator_end-total_init_predator)/total_init_predator));
-            myWriter.write(String.format("Predator at the end: %d, start: %d change rate: %d%%",total_predator_end,total_init_predator,100*(total_predator_end-total_init_predator)/total_init_predator));
+            // myWriter.write(String.format("Predator at the end: %d, start: %d change rate: %d%%",total_predator_end,total_init_predator,100*(total_predator_end-total_init_predator)/total_init_predator));
 
             
             myWriter.close();
