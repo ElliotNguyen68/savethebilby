@@ -114,6 +114,11 @@ class ManageConservationist {
     }
 
     public void interventory(){
+        // we have an array to store whether a location did conduct interventory or not,
+        // check amount of not conduct yet(location conducted will have value in done_interventory_locations=true)
+        // , if number of left locations is >0, so we can do interventory
+        // list all available location, their values in done_interventory_locations = false, check valid input by regex
+        // and go to location to make die by half function
         int count_left=0;
         for (boolean check: this.done_interventory_locations){
             if (!check){
