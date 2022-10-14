@@ -259,4 +259,9 @@ class Zone {
             this.update_status();
         }
     }
+
+    @Override
+    public String toString() {
+        return String.format("Location %d, bilby: %d, cat: %d, fox: %d", this.zone_number+1,this.num_bilby,this.num_cat,this.num_fox);
+    }
 }

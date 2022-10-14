@@ -10,6 +10,7 @@ class ManageConservationist {
     int num_zones;
     private int limit_bilby=20;
     public int total_bilby_start=0;
+    private boolean done_interventory_locations[];
 
     public ManageConservationist(){}
 
@@ -32,6 +33,7 @@ class ManageConservationist {
     public ManageConservationist(int num_zones) {
         this.num_zones = num_zones;
         list_zones = new Zone[num_zones];
+        done_interventory_locations=new boolean[num_zones];
     }
 
     public Zone[] getList_zones() {
@@ -54,7 +56,7 @@ class ManageConservationist {
         for (Zone zone : list_zones) {
             zone.update_status();
             // System.out.println(zone.num_bilby_so_far);
-            System.out.println(String.format("Location %d, bilby: %d, cat: %d, fox: %d", zone.zone_number+1,zone.num_bilby,zone.num_cat,zone.num_fox));
+            System.out.println(zone);
             // System.out.println(zone.num_bilby);
             // System.out.println(zone.num_fox);
             // System.out.println(zone.num_cat);
@@ -112,9 +114,35 @@ class ManageConservationist {
     }
 
     public void interventory(){
-        for (Zone zone:this.list_zones){
-            zone.die_by_haft_predators();
+        int count_left=0;
+        for (boolean check: this.done_interventory_locations){
+            if (!check){
+                count_left+=1;
+            }
         }
+        if (count_left==0){
+            System.out.println("No left location can conduct interventory");
+            return;
+        }
+        System.out.println("Available locations to do interventory: ");
+        ArrayList tmp=new ArrayList<Integer>();
+        for (int i=0;i<this.done_interventory_locations.length;i++){
+            if (!this.done_interventory_locations[i]){
+                tmp.add(i);
+                System.out.println(this.list_zones[i]);
+            }
+        }
+        String valid_regex="^(";
+        for (int i=0;i<tmp.size();i++){
+            valid_regex+=String.format("%d|", ((int)tmp.get(i)+1));
+        }
+        valid_regex=valid_regex.substring(0, valid_regex.length()-1);
+        valid_regex+=")$";
+        System.out.println(valid_regex);
+        int location=Integer.valueOf(InputValidator.get_input(valid_regex, "Enter location want to conduct interventory: "));
+        
+        this.list_zones[location-1].die_by_haft_predators();
+        this.done_interventory_locations[location-1]=true;
     }
 
     
@@ -278,19 +306,16 @@ class ManageConservationist {
                 while (! valid_choice){
                     System.out.println("Select following options:");
                     System.out.println("1.Relocate bilby between 2 location");
-                    if(! did_interventory){
-                        System.out.println("2.Conduct interventory");
-                    }
+                    // if(! did_interventory){
+                    System.out.println("2.Conduct interventory");
+                    // }
                     System.out.println("3.Pass");
                     // System.out.println("Your selection [1-3]: ");
                     // int option=Integer.valueOf(scanner.next().strip());
                     int option=Integer.valueOf(InputValidator.get_input("^([1-3])$", "Your selection [1-3]: "));
-                    if (option==1 ||option==3 ||(option==2 && ! did_interventory)){
+                    if (option==1 ||option==3 ||option==2){
                         this.action_option(option);
                         valid_choice=true;
-                        if (option==2){
-                            did_interventory=true;
-                        }
                     }
                     else{
                         valid_choice=false;
