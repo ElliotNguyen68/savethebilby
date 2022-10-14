@@ -54,21 +54,9 @@ public class Bilby extends Animal{
         this.is_alive = false;
     }
 
-
+    @Override
     public String toString() {
         return (String.format("Bilby, id: %s, is_alive: %b, giving_birth_prob: %,.3f", this.id, this.is_alive,this.giving_birth_prob));
-    }
-
-    public String get_id(){
-        return this.id;
-    }
-
-    public boolean get_is_alive(){
-        return this.is_alive;
-    }
-
-    public double get_giving_birth_prob(){
-        return this.giving_birth_prob;
     }
 
     public void set_is_alive(boolean is_alive){
@@ -100,18 +88,18 @@ public class Bilby extends Animal{
         // Bilby b4=new Bilby("C005",1.1);
 
         System.out.print("Test get_id() method: ");
-        System.out.println(b1.get_id());
+        System.out.println(b1.getId());
         
         System.out.print("Test get_giving_birth_prob() method: ");
-        System.out.println(b1.get_giving_birth_prob());
+        System.out.println(b1.getGiving_birth_prob());
 
         System.out.print("Test set_id() method with valid id: ");
         b1.set_id("B000");
-        System.out.println(b1.get_id());
+        System.out.println(b1.getId());
 
         System.out.print("Test set_giving_birth_prob() method with valid value: ");
         b1.set_giving_birth_prob(.19);
-        System.out.println(b1.get_giving_birth_prob());
+        System.out.println(b1.getGiving_birth_prob());
 
         Bilby b3=new Bilby();
         System.out.println(b3);

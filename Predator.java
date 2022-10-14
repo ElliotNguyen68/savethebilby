@@ -22,6 +22,18 @@ class Predator extends Animal {
         this.health = 3;
     }
     
+    public int getHealth() {
+        return health;
+    }
+
+    public double getEat_prob() {
+        return eat_prob;
+    }
+
+    public String getType() {
+        return type;
+    }
+
     public Predator(String type,double giving_birth_prob,double eat_prob) {
         assert (type =="Fox" | type =="Cat");
         if (type == "Fox") {
@@ -81,7 +93,7 @@ class Predator extends Animal {
         System.out.println(b);
         Predator c=new Predator("Fox");
         System.out.println(c);
-        Animal e=new Animal();
+        Animal e=new Bilby();
         System.out.println(e);
     }
 }

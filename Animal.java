@@ -1,18 +1,21 @@
-class Animal extends BaseAnimal {
+abstract class Animal {
     // using this static variable to create incremental id, whenever an object belong to Bilby class or extended from Bilby class is instanced, this variable will increased by 1.
     static int id_int=0;
 
+    String id;
+    public boolean is_alive;
+    public double giving_birth_prob;
+
     public Animal(){
         Animal.id_int+=1;
+        this.is_alive=true;
     }
 
-    @Override
     void force_die() {
         this.is_alive = false;
     }
 
 
-    @Override
     boolean giving_birth_now() {
         // TODO Auto-generated method stub
         if (this.is_alive == false) {
@@ -21,16 +24,16 @@ class Animal extends BaseAnimal {
         return Math.random() <= this.giving_birth_prob;
     }
 
-    public String get_id(){
-        return this.id;
+    public String getId() {
+        return id;
     }
 
-    public boolean get_is_alive(){
-        return this.is_alive;
+    public boolean isIs_alive() {
+        return is_alive;
     }
 
-    public double get_giving_birth_prob(){
-        return this.giving_birth_prob;
+    public double getGiving_birth_prob() {
+        return giving_birth_prob;
     }
 
     public void set_is_alive(boolean is_alive){
