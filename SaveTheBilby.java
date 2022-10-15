@@ -10,7 +10,6 @@ import java.util.Scanner;
 class SaveTheBilby {
 
     public static void main(String[] args) {
-
         Path path = Paths.get("populationStart.txt");
         long lines = 0;
         try {

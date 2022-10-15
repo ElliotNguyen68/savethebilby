@@ -292,7 +292,6 @@ class ManageConservationist {
         System.out.println("Polulation at the begining");
         this.statistic();
 
-        boolean did_interventory=false;
         for (int k = 0; k < 12; k++) {
             for (int i = 0; i < this.num_zones; i++) {
                 Zone zone = this.list_zones[i];

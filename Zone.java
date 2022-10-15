@@ -256,6 +256,7 @@ class Zone {
                     break;
                 }
             }
+            System.out.println(String.format("All %d in location %d excess bilbies have died", this.num_bilby-lim_bilby,this.zone_number+1));
             this.update_status();
         }
     }
