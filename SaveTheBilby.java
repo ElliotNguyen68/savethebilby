@@ -39,7 +39,7 @@ class SaveTheBilby {
                 
                 List<String> info_this_zone=Arrays.asList(scanner.nextLine().split(","));
                 // System.out.print(info_this_zone.get(2));
-                manage_conservation.add_zone_info(Integer.valueOf(info_this_zone.get(0)),Integer.valueOf(info_this_zone.get(1)),Integer.valueOf(info_this_zone.get(2)), i);
+                manage_conservation.add_location_info(Integer.valueOf(info_this_zone.get(0)),Integer.valueOf(info_this_zone.get(1)),Integer.valueOf(info_this_zone.get(2)), i);
             }
            
         } catch (Exception e) {

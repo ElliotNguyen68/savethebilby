@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-class Zone {
-    int zone_number;
+class Location {
+    int location_number;
     int num_fox;
     int num_cat;
     int num_bilby;
@@ -23,12 +23,12 @@ class Zone {
     ArrayList<Animal> list_cat = new ArrayList<Animal>();
     ArrayList<Animal> list_fox = new ArrayList<Animal>();
 
-    public Zone(int num_bilby, int num_cat, int num_fox, int zone_number) {
+    public Location(int num_bilby, int num_cat, int num_fox, int zone_number) {
         // alive
         this.num_bilby = num_bilby;
         this.num_fox = num_fox;
         this.num_cat = num_cat;
-        this.zone_number = zone_number;
+        this.location_number = zone_number;
         
         // dead
         this.dead_bilby = num_bilby;
@@ -256,13 +256,13 @@ class Zone {
                     break;
                 }
             }
-            System.out.println(String.format("All %d excess bilbies in location %d  have died", this.num_bilby-lim_bilby,this.zone_number+1));
+            System.out.println(String.format("All %d excess bilbies in location %d  have died", this.num_bilby-lim_bilby,this.location_number+1));
             this.update_status();
         }
     }
 
     @Override
     public String toString() {
-        return String.format("Location %d, bilby: %d, cat: %d, fox: %d", this.zone_number+1,this.num_bilby,this.num_cat,this.num_fox);
+        return String.format("Location %d, bilby: %d, cat: %d, fox: %d", this.location_number+1,this.num_bilby,this.num_cat,this.num_fox);
     }
 }

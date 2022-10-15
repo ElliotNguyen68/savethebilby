@@ -6,20 +6,20 @@ import java.util.Scanner;
 
 
 class ManageConservationist {
-    Zone list_zones[];
-    int num_zones;
+    Location list_locations[];
+    int num_locations;
     private int limit_bilby=20;
     public int total_bilby_start=0;
     private boolean done_interventory_locations[];
 
     public ManageConservationist(){}
 
-    public void setList_zones(Zone[] list_zones) {
-        this.list_zones = list_zones;
+    public void setList_locations(Location[] list_locations) {
+        this.list_locations = list_locations;
     }
 
-    public void setNum_zones(int num_zones) {
-        this.num_zones = num_zones;
+    public void setNum_locations(int num_locations) {
+        this.num_locations = num_locations;
     }
 
     public void setLimit_bilby(int limit_bilby) {
@@ -30,18 +30,18 @@ class ManageConservationist {
         this.total_bilby_start = total_bilby_start;
     }
 
-    public ManageConservationist(int num_zones) {
-        this.num_zones = num_zones;
-        list_zones = new Zone[num_zones];
-        done_interventory_locations=new boolean[num_zones];
+    public ManageConservationist(int num_locations) {
+        this.num_locations = num_locations;
+        list_locations = new Location[num_locations];
+        done_interventory_locations=new boolean[num_locations];
     }
 
-    public Zone[] getList_zones() {
-        return list_zones;
+    public Location[] getList_locations() {
+        return list_locations;
     }
 
-    public int getNum_zones() {
-        return num_zones;
+    public int getNum_locations() {
+        return num_locations;
     }
 
     public int getLimit_bilby() {
@@ -53,55 +53,55 @@ class ManageConservationist {
     }
 
     public void statistic() {
-        for (Zone zone : list_zones) {
-            zone.update_status();
-            // System.out.println(zone.num_bilby_so_far);
-            System.out.println(zone);
-            // System.out.println(zone.num_bilby);
-            // System.out.println(zone.num_fox);
-            // System.out.println(zone.num_cat);
+        for (Location Location : list_locations) {
+            Location.update_status();
+            // System.out.println(Location.num_bilby_so_far);
+            System.out.println(Location);
+            // System.out.println(Location.num_bilby);
+            // System.out.println(Location.num_fox);
+            // System.out.println(Location.num_cat);
         }
     }
 
-    public void add_zone_info(int num_bilby, int num_cat, int num_fox, int zone_number) {
-        this.list_zones[zone_number] = new Zone(num_bilby, num_cat, num_fox, zone_number);
+    public void add_location_info(int num_bilby, int num_cat, int num_fox, int Location_number) {
+        this.list_locations[Location_number] = new Location(num_bilby, num_cat, num_fox, Location_number);
         this.total_bilby_start+=num_bilby;
     }
 
-    public boolean check_amount_bilby(int zone_num,int amount,boolean sub_from){
-        // this.list_zones[zone_num].update_status(); 
+    public boolean check_amount_bilby(int Location_num,int amount,boolean sub_from){
+        // this.list_locations[Location_num].update_status(); 
         boolean check;
         if (sub_from){
 
-            check= this.list_zones[zone_num].num_bilby>=amount;
+            check= this.list_locations[Location_num].num_bilby>=amount;
             if (! check){
-                System.out.println(String.format("Can not get %d from %d", amount,this.list_zones[zone_num].num_bilby));
+                System.out.println(String.format("Can not get %d from %d", amount,this.list_locations[Location_num].num_bilby));
                 return check;
             }
             return true;
         }
 
-        check= this.list_zones[zone_num].num_bilby+amount<=this.limit_bilby;
+        check= this.list_locations[Location_num].num_bilby+amount<=this.limit_bilby;
         if (!check){
-            System.out.println(String.format("%d + %d is over limit %d", this.list_zones[zone_num].num_bilby,amount,this.limit_bilby));
+            System.out.println(String.format("%d + %d is over limit %d", this.list_locations[Location_num].num_bilby,amount,this.limit_bilby));
         }
         return check;
     }
 
-    public boolean relocate_2_zone(int zone_num1,int zone_num2, int amount){
-        zone_num1-=1;
-        zone_num2-=1;
-        System.out.println(String.format("%d %d", zone_num1,zone_num2));
-        if (zone_num1>=this.num_zones |zone_num2>=this.num_zones | zone_num1<0 |zone_num2<0){
+    public boolean relocate_2_Location(int Location_num1,int Location_num2, int amount){
+        Location_num1-=1;
+        Location_num2-=1;
+        System.out.println(String.format("%d %d", Location_num1,Location_num2));
+        if (Location_num1>=this.num_locations |Location_num2>=this.num_locations | Location_num1<0 |Location_num2<0){
             return false;
         }
 
-        boolean check=check_amount_bilby(zone_num1, amount, true) && check_amount_bilby(zone_num2, amount, false);
+        boolean check=check_amount_bilby(Location_num1, amount, true) && check_amount_bilby(Location_num2, amount, false);
         if (! check ){
             return false;
         }
         ArrayList<Animal> tmp=new ArrayList<>();
-        Iterator<Animal> iter_bilby=this.list_zones[zone_num1].list_bilby.iterator();
+        Iterator<Animal> iter_bilby=this.list_locations[Location_num1].list_bilby.iterator();
         while (iter_bilby.hasNext() &&(amount>0)){
             Animal tmp_bilby=iter_bilby.next();
             if (tmp_bilby.is_alive){
@@ -111,7 +111,7 @@ class ManageConservationist {
             }
         }
 
-        this.list_zones[zone_num2].list_bilby.addAll(tmp);    
+        this.list_locations[Location_num2].list_bilby.addAll(tmp);    
         return true;
     }
 
@@ -136,7 +136,7 @@ class ManageConservationist {
         for (int i=0;i<this.done_interventory_locations.length;i++){
             if (!this.done_interventory_locations[i]){
                 tmp.add(i);
-                System.out.println(this.list_zones[i]);
+                System.out.println(this.list_locations[i]);
             }
         }
         String valid_regex="^(";
@@ -148,7 +148,7 @@ class ManageConservationist {
         // System.out.println(valid_regex);
         int location=Integer.valueOf(InputValidator.get_input(valid_regex, "Enter location want to conduct interventory: ","This location already did interventory"));
         
-        this.list_zones[location-1].die_by_haft_predators();
+        this.list_locations[location-1].die_by_haft_predators();
         this.done_interventory_locations[location-1]=true;
         System.out.println("Done interventory");
         System.out.println("Statistc after interventory: ");
@@ -169,12 +169,12 @@ class ManageConservationist {
             while (!check){
                 System.out.println("Enter 2 location and amount bilby to relocate");
 
-                int zone_num1=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "1st location (from):"));
-                int zone_num2=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "2nd location (to):"));
+                int Location_num1=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "1st location (from):"));
+                int Location_num2=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "2nd location (to):"));
                 
 
                 int amount=Integer.valueOf(InputValidator.get_input("^([0-9]*)$", "Amount: "));
-                check=this.relocate_2_zone(zone_num1, zone_num2, amount)&& (zone_num1!=zone_num2);
+                check=this.relocate_2_Location(Location_num1, Location_num2, amount)&& (Location_num1!=Location_num2);
                 if (! check){
 
                     des=InputValidator.get_input("^(y|Y|n|N)$","Invalid input, do you want to try another(Y-N) ? ").toLowerCase();
@@ -206,8 +206,8 @@ class ManageConservationist {
     }
 
     public void limit_bilby(){
-        for (Zone zone: this.list_zones){
-            zone.limit_bilby(this.limit_bilby);
+        for (Location Location: this.list_locations){
+            Location.limit_bilby(this.limit_bilby);
         }
     }
 
@@ -222,38 +222,38 @@ class ManageConservationist {
             FileWriter myWriter = new FileWriter("populationFinal.txt");
             System.out.println("============ Population details at each location =========");
             // myWriter.write("============ Population details at each location =========\n");
-            for(Zone zone: this.list_zones){
-                zone.update_status();
-                System.out.println(String.format("-------Location %dth-------",zone.zone_number+1));
-                // myWriter.write(String.format("-------Location %dth-------\n",zone.zone_number+1));
+            for(Location Location: this.list_locations){
+                Location.update_status();
+                System.out.println(String.format("-------Location %dth-------",Location.location_number+1));
+                // myWriter.write(String.format("-------Location %dth-------\n",Location.Location_number+1));
 
                 System.out.println("Alive");
                 // myWriter.write("Alive \n");
 
-                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.num_bilby,zone.num_cat,zone.num_fox));
-                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby,zone.num_cat,zone.num_fox));
+                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", Location.num_bilby,Location.num_cat,Location.num_fox));
+                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", Location.num_bilby,Location.num_cat,Location.num_fox));
 
                 System.out.println("New born");
                 // myWriter.write("New born \n");
 
-                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.born_bilby,zone.born_cat,zone.born_fox));
-                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby_so_far-zone.init_bilby,zone.num_cat_so_far-zone.init_cat,zone.num_fox_so_far-zone.init_fox));
+                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", Location.born_bilby,Location.born_cat,Location.born_fox));
+                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", Location.num_bilby_so_far-Location.init_bilby,Location.num_cat_so_far-Location.init_cat,Location.num_fox_so_far-Location.init_fox));
 
                 System.out.println("Have died");
                 // myWriter.write("Have died \n");
 
-                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", zone.dead_bilby,zone.dead_cat,zone.dead_fox));
-                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", zone.num_bilby_so_far-zone.num_bilby,zone.num_cat_so_far-zone.num_cat,zone.num_fox_so_far-zone.num_fox));
+                System.out.println(String.format("bilby: %d, cat: %d, fox: %d", Location.dead_bilby,Location.dead_cat,Location.dead_fox));
+                // myWriter.write(String.format("bilby: %d, cat: %d, fox: %d \n", Location.num_bilby_so_far-Location.num_bilby,Location.num_cat_so_far-Location.num_cat,Location.num_fox_so_far-Location.num_fox));
                 
-                myWriter.write(String.format("%d, %d, %d, %d, %d, %d \n", zone.num_bilby, zone.dead_bilby, 
-                zone.num_fox,zone.dead_fox,zone.num_cat, zone.dead_cat));
+                myWriter.write(String.format("%d, %d, %d, %d, %d, %d \n", Location.num_bilby, Location.dead_bilby, 
+                Location.num_fox,Location.dead_fox,Location.num_cat, Location.dead_cat));
                 
-                total_bilby_end+=zone.num_bilby;
-                total_new_birth_bilby+=zone.list_bilby.size()-zone.init_bilby;
-                total_death_bilby+=zone.dead_bilby;
-                total_init_bilby+=zone.init_bilby;
-                total_init_predator+=zone.init_fox+zone.init_cat;
-                total_predator_end+=zone.num_cat+zone.num_fox;
+                total_bilby_end+=Location.num_bilby;
+                total_new_birth_bilby+=Location.list_bilby.size()-Location.init_bilby;
+                total_death_bilby+=Location.dead_bilby;
+                total_init_bilby+=Location.init_bilby;
+                total_init_predator+=Location.init_fox+Location.init_cat;
+                total_predator_end+=Location.num_cat+Location.num_fox;
             }       
 
             System.out.println("============ Bilby population change =========");
@@ -289,8 +289,8 @@ class ManageConservationist {
 
     public void run_simulation() {
         boolean continue_simulate =true;
-        for (Zone zone : this.list_zones) {
-            zone.init_animal();
+        for (Location Location : this.list_locations) {
+            Location.init_animal();
         }
         System.out.println("=========Start simulation===========");
         
@@ -298,18 +298,18 @@ class ManageConservationist {
         this.statistic();
 
         for (int k = 0; k < 12; k++) {
-            for (int i = 0; i < this.num_zones; i++) {
-                Zone zone = this.list_zones[i];
-                zone.one_month_process();
-                zone.update_status();
+            for (int i = 0; i < this.num_locations; i++) {
+                Location Location = this.list_locations[i];
+                Location.one_month_process();
+                Location.update_status();
                 
             }
             System.out.println(String.format("=========Month %d=========",k+1));
             this.statistic();
-            for (int i = 0; i < this.num_zones; i++) {
-                Zone zone = this.list_zones[i];
-                if (zone.num_bilby>this.limit_bilby){
-                    System.out.println(String.format("Location %d have %d bilbies which is excess limit(%d)", i+1,zone.num_bilby,this.limit_bilby));
+            for (int i = 0; i < this.num_locations; i++) {
+                Location Location = this.list_locations[i];
+                if (Location.num_bilby>this.limit_bilby){
+                    System.out.println(String.format("Location %d have %d bilbies which is excess limit(%d)", i+1,Location.num_bilby,this.limit_bilby));
                 }
             }
 
