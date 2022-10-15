@@ -78,6 +78,7 @@ class ManageConservationist {
                 System.out.println(String.format("Can not get %d from %d", amount,this.list_zones[zone_num].num_bilby));
                 return check;
             }
+            return true;
         }
 
         check= this.list_zones[zone_num].num_bilby+amount<=this.limit_bilby;
@@ -90,6 +91,7 @@ class ManageConservationist {
     public boolean relocate_2_zone(int zone_num1,int zone_num2, int amount){
         zone_num1-=1;
         zone_num2-=1;
+        System.out.println(String.format("%d %d", zone_num1,zone_num2));
         if (zone_num1>=this.num_zones |zone_num2>=this.num_zones | zone_num1<0 |zone_num2<0){
             return false;
         }
