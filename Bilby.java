@@ -1,5 +1,7 @@
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class Bilby extends Animal{
 
@@ -74,8 +76,15 @@ public class Bilby extends Animal{
             System.out.println("Fail to set_giving_birth_prob ");
             // TODO: handle exception
         }
-        // System.out.println(b1.get_giving_birth_prob());
 
+        System.out.println("Test format id of bilby:");
+
+        Pattern pattern=Pattern.compile("^B[0-9]{3}$");
+
+        Matcher matcher = pattern.matcher(b3.getId());
+        assert matcher.find(): "Fail in id";
+        System.out.println("Right format bilby");
+\
     }
 
     public static void main(String[] args) {
