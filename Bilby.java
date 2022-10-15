@@ -84,7 +84,6 @@ public class Bilby extends Animal{
         Matcher matcher = pattern.matcher(b3.getId());
         assert matcher.find(): "Fail in id";
         System.out.println("Right format bilby");
-\
     }
 
     public static void main(String[] args) {

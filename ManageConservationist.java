@@ -299,9 +299,17 @@ class ManageConservationist {
             for (int i = 0; i < this.num_zones; i++) {
                 Zone zone = this.list_zones[i];
                 zone.one_month_process();
+                zone.update_status();
+                
             }
             System.out.println(String.format("=========Month %d=========",k+1));
             this.statistic();
+            for (int i = 0; i < this.num_zones; i++) {
+                Zone zone = this.list_zones[i];
+                if (zone.num_bilby>this.limit_bilby){
+                    System.out.println(String.format("Location %d have %d bilbies which is excess limit(%d)", i+1,zone.num_bilby,this.limit_bilby));
+                }
+            }
 
             String descision=InputValidator.get_input("^(y|Y|n|N)$","Continue simulation (Y-N)? ").toLowerCase();
  
