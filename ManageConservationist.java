@@ -144,7 +144,7 @@ class ManageConservationist {
         valid_regex=valid_regex.substring(0, valid_regex.length()-1);
         valid_regex+=")$";
         // System.out.println(valid_regex);
-        int location=Integer.valueOf(InputValidator.get_input(valid_regex, "Enter location want to conduct interventory: "));
+        int location=Integer.valueOf(InputValidator.get_input(valid_regex, "Enter location want to conduct interventory: ","This location already did interventory"));
         
         this.list_zones[location-1].die_by_haft_predators();
         this.done_interventory_locations[location-1]=true;
