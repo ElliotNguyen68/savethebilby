@@ -148,6 +148,10 @@ class ManageConservationist {
         
         this.list_zones[location-1].die_by_haft_predators();
         this.done_interventory_locations[location-1]=true;
+        System.out.println("Done interventory");
+        System.out.println("Statistc after interventory: ");
+         
+        this.statistic();
     }
 
     
@@ -194,7 +198,6 @@ class ManageConservationist {
         }
         if (option==2){
             this.interventory();
-            System.out.println("Done interventory");
 
         }
         // scanner.close();
@@ -306,24 +309,30 @@ class ManageConservationist {
                 continue_simulate=false;
             }
             else{
-                boolean valid_choice=false;
-                while (! valid_choice){
-                    System.out.println("Select following options:");
-                    System.out.println("1.Relocate bilby between 2 location");
-                    // if(! did_interventory){
-                    System.out.println("2.Conduct interventory");
-                    // }
-                    System.out.println("3.Pass");
-                    // System.out.println("Your selection [1-3]: ");
-                    // int option=Integer.valueOf(scanner.next().strip());
-                    int option=Integer.valueOf(InputValidator.get_input("^([1-3])$", "Your selection [1-3]: "));
-                    if (option==1 ||option==3 ||option==2){
-                        this.action_option(option);
-                        valid_choice=true;
-                    }
-                    else{
-                        valid_choice=false;
-                        System.out.println("Not a valid input");
+                boolean move_on=false;
+                while (! move_on){
+                    boolean valid_choice=false;
+                    while (! valid_choice){
+                        System.out.println("Select following options:");
+                        System.out.println("1.Relocate bilby between 2 location");
+                        // if(! did_interventory){
+                        System.out.println("2.Conduct interventory");
+                        // }
+                        System.out.println("3.Pass (move to next month)");
+                        // System.out.println("Your selection [1-3]: ");
+                        // int option=Integer.valueOf(scanner.next().strip());
+                        int option=Integer.valueOf(InputValidator.get_input("^([1-3])$", "Your selection [1-3]: "));
+                        if (option==1 ||option==3 ||option==2){
+                            this.action_option(option);
+                            valid_choice=true;
+                            if (option==3){
+                                move_on=true;
+                            }
+                        }
+                        else{
+                            valid_choice=false;
+                            System.out.println("Not a valid input");
+                        }
                     }
                 }
             
