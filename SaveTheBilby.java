@@ -9,7 +9,14 @@ import java.util.Scanner;
 
 class SaveTheBilby {
 
+    public static void welcome(){
+        System.out.println("Welcome to Bilby survival simulation");
+        String name=InputValidator.get_input("^[a-z,A-Z]{1,16}$", "Please enter the name of area : ","Name not valid, only in a-Z, lenght<=16");
+
+
+    }
     public static void main(String[] args) {
+        welcome();
         Path path = Paths.get("populationStart.txt");
         long lines = 0;
         try {
