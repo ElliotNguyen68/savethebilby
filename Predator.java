@@ -1,9 +1,15 @@
-// Predator inherit from Bilby, so Predator object can use method and attribute of Bilby class, furthermore, it has it's own method and attribute.
+/*
+Predator inherit from Bilby, so Predator object can use method and attribute of Bilby class, furthermore, it has it's own method and attribute.
+A mode Predator
+ */
 class Predator extends Animal {
     public int health;
     public double eat_prob;
     public String type;
 
+    /*
+     * @param type String
+     */
     public Predator(String type) {
         assert (type =="Fox" | type =="Cat");
         if (type == "Fox") {
@@ -34,6 +40,11 @@ class Predator extends Animal {
         return type;
     }
 
+    /*
+     * @param type String
+     * @param giving_birth_prob double
+     * @param eat_prob double
+     */
     public Predator(String type,double giving_birth_prob,double eat_prob) {
         assert (type =="Fox" | type =="Cat");
         if (type == "Fox") {
@@ -60,6 +71,9 @@ class Predator extends Animal {
         return Math.random() <= this.eat_prob;
     }
 
+     /*
+     * @param increase boolean
+     */
     public void update_health(boolean increase) {
         // this function will update health of predator
         // if not alive return
@@ -87,6 +101,7 @@ class Predator extends Animal {
         }
     }
 
+    // Code for test
     public static void main(String[] args) {
         Predator a=new Predator("Cat");
         System.out.println(a);

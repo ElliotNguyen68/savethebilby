@@ -3,8 +3,15 @@ import java.util.regex.Pattern;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+/*
+* A mode Bilby
+*/
 public class Bilby extends Animal{
 
+    /*
+     * @param id String
+     * @return boolean
+     */
     boolean check_id(String id){
         Pattern pattern=Pattern.compile("^B[0-9]{3}$");
         Matcher matcher = pattern.matcher(id);
@@ -23,18 +30,21 @@ public class Bilby extends Animal{
         this.set_giving_birth_prob(0.15);
     }
     
+    /*
+     * @param giving_birth_prob douple
+     */
     public Bilby(double giving_birth_prob){
         this.set_giving_birth_prob(giving_birth_prob);
         this.id=String.format("B%03d",  Bilby.id_int);
         this.is_alive = true;
     }
 
-
     @Override
     public String toString() {
         return (String.format("Bilby, id: %s, is_alive: %b, giving_birth_prob: %,.3f", this.id, this.is_alive,this.giving_birth_prob));
     }
 
+    // Code for run test
     private void test(){
         System.out.println("Create a Bilby object with the default constructor");
         Bilby b1=new Bilby();
@@ -53,8 +63,6 @@ public class Bilby extends Animal{
             System.out.println("Fail to init object  ");
             // TODO: handle exception
         }
-
-    
 
         System.out.print("Test get_id() method: ");
         System.out.println(b1.getId());
@@ -86,9 +94,9 @@ public class Bilby extends Animal{
         System.out.println("Right format bilby");
     }
 
+    // Code for run test
     public static void main(String[] args) {
         Bilby bilby=new Bilby();
         bilby.test();
-         
-        }
+    }
 }

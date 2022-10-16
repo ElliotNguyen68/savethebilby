@@ -5,6 +5,10 @@ public class Fox extends Predator{
         super("Fox");
     }
 
+    /*
+     * @param giving_birth_prob douple
+     * @param eat_prob douple
+     */
     public Fox(double giving_birth_prob,double eat_prob){
         super("Fox",giving_birth_prob,eat_prob);
     }
@@ -15,6 +19,7 @@ public class Fox extends Predator{
                 this.health));
     }
 
+    // Code for run test
     public static void main(String[] args) {
         Fox f1=new Fox();
         System.out.println(f1);
