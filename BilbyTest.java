@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 /*
-* A mode Bilby
+* A BilbyTest
 */
 public class BilbyTest {
     private void test_create_by_non_default() {

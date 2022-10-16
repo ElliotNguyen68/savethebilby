@@ -18,18 +18,4 @@ public class Fox extends Predator{
         return (String.format("Fox, id: %s, is_alive: %b, health: %d", this.id, this.is_alive,
                 this.health));
     }
-
-    // Code for run test
-    public static void main(String[] args) {
-        Fox f1=new Fox();
-        System.out.println(f1);
-        Fox f2=new Fox(0.1,0.2);
-        System.out.println(f2);
-        try {
-            Fox f3=new Fox(1.1,3.1);
-        } catch (AssertionError e) {
-            System.out.println("Fail to init");
-            // TODO: handle exception
-        }
-    }
 }

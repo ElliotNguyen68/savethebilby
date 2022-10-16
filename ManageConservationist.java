@@ -319,7 +319,7 @@ class ManageConservationist {
             for (int i = 0; i < this.num_locations; i++) {
                 Location Location = this.list_locations[i];
                 if (Location.num_bilby>this.limit_bilby){
-                    System.out.println(String.format("Location %d have %d bilbies which is excess limit(%d)", i+1,Location.num_bilby,this.limit_bilby));
+                    System.out.println(String.format("WARNING: Location %d have %d bilbies which is excess limit(%d)", i+1,Location.num_bilby,this.limit_bilby));
                 }
             }
 
