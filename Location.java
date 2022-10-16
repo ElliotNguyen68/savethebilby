@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
+/*
+* A mode Location
+*/
 class Location {
     int location_number;
     int num_fox;
@@ -23,6 +25,12 @@ class Location {
     ArrayList<Animal> list_cat = new ArrayList<Animal>();
     ArrayList<Animal> list_fox = new ArrayList<Animal>();
 
+    /*
+     * @param num_bilby int
+     * @param num_cat int
+     * @param num_fox int
+     * @param zone_number int
+     */
     public Location(int num_bilby, int num_cat, int num_fox, int zone_number) {
         // alive
         this.num_bilby = num_bilby;
@@ -106,7 +114,11 @@ class Location {
         // check remain bilby in zone
         return this.num_bilby > 0;
     }
-
+    
+    /*
+     * @param type String
+     * @param number int
+     */
     public void generate_new_animal(String type, int number) {
         // Given animal type, with a number of new one, add new #number animals of type to list animal of this zone.
         ArrayList<Animal> tmp ;
@@ -212,7 +224,6 @@ class Location {
     }
 
     public void one_month_process() {
-        // System.out.println("dafs");
         this.giving_birth();
         this.update_status();
         this.predator_hunting();
@@ -242,6 +253,9 @@ class Location {
         } 
     }
     
+    /*
+     * @param lim_bilby int
+     */
     public void limit_bilby(int lim_bilby){
         this.update_status();
 
