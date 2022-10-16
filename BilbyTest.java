@@ -26,6 +26,13 @@ public class BilbyTest {
         System.out.print("Test set_giving_birth_prob() method with valid value: ");
         b1.set_giving_birth_prob(.19);
         System.out.println(b1.getGiving_birth_prob());
+
+        System.out.print("Test setId() method with valid value: ");
+        b1.setId("B101");
+        System.out.println(b1.getId());
+
+         
+
     }
 
     private void test_create_by_default(){
@@ -53,6 +60,18 @@ public class BilbyTest {
         Matcher matcher = pattern.matcher(b3.getId());
         assert matcher.find(): "Fail in id";
         System.out.println("Right format bilby");
+
+        System.out.println("Test set id with invalid format");
+
+        try {
+            b3.setId("dfkj");
+
+        } catch (AssertionError e) {
+            // TODO: handle exception
+            System.out.println("Invalid format");
+        }
+
+        
     }
 
     private void test_nagative_create_by_invalid_non_default() {

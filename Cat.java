@@ -5,6 +5,14 @@ public class Cat extends Predator{
     }
 
     /*
+     * @param id String
+     */
+    public void setId(String id){
+        assert check_id(id,"^C[0-9]{3}$"):"Invalid id";
+        this.id=id;
+    }
+
+    /*
      * @param giving_birth_prob double
      * @param eat_prob double
      */

@@ -4,6 +4,12 @@ public class Fox extends Predator{
     public Fox(){
         super("Fox");
     }
+    
+    public void setId(String id){
+        assert check_id(id,"^F[0-9]{3}$"):"Invalid id";
+        this.id=id;
+    }
+
 
     /*
      * @param giving_birth_prob douple

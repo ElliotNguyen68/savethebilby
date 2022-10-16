@@ -12,17 +12,6 @@ public class Bilby extends Animal{
      * @param id String
      * @return boolean
      */
-    boolean check_id(String id){
-        Pattern pattern=Pattern.compile("^B[0-9]{3}$");
-        Matcher matcher = pattern.matcher(id);
-        boolean found=matcher.find();
-        if (! found){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
 
     public Bilby(){
         this.id=String.format("B%03d",  Bilby.id_int);
@@ -37,6 +26,14 @@ public class Bilby extends Animal{
         this.set_giving_birth_prob(giving_birth_prob);
         this.id=String.format("B%03d",  Bilby.id_int);
         this.is_alive = true;
+    }
+
+    /*
+     * @param id String
+     */
+    public void setId(String id){
+        assert check_id(id,"^B[0-9]{3}$"):"Invalid id";
+        this.id=id;
     }
 
     @Override
