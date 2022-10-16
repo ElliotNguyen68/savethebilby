@@ -15,5 +15,5 @@ javac SaveTheBilby.java && java SaveTheBilby
 
 ```bash
 # Run test BilBy class only
-javac Bilby.java && java -ea Bilby
+javac BilbyTest.java && java -ea BilbyTest
 ```
