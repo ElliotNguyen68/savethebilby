@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 public class BilbyTest {
     private void test_create_by_non_default() {
         System.out.println("Create a Bilby object with the non-default constructor with valid field values");
-        Bilby b2=new Bilby(0.14);
+        Bilby b2=new Bilby(0.15);
         System.out.println(b2); 
     }
     
@@ -24,7 +24,7 @@ public class BilbyTest {
         System.out.println(b1.getGiving_birth_prob());
 
         System.out.print("Test set_giving_birth_prob() method with valid value: ");
-        b1.set_giving_birth_prob(.19);
+        b1.set_giving_birth_prob(.15);
         System.out.println(b1.getGiving_birth_prob());
 
         System.out.print("Test setId() method with valid value: ");

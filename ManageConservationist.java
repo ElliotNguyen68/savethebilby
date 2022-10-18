@@ -106,9 +106,9 @@ class ManageConservationist {
 
         check= this.list_locations[location_num].num_bilby+amount<=this.limit_bilby;
         if (!check){
-            System.out.println(String.format("%d + %d is over limit %d", this.list_locations[location_num].num_bilby,amount,this.limit_bilby));
+            System.out.println(String.format("%d + %d will over limit %d", this.list_locations[location_num].num_bilby,amount,this.limit_bilby));
         }
-        return check;
+        return true;
     }
 
     /*
@@ -120,7 +120,7 @@ class ManageConservationist {
     public boolean relocate_2_Location(int location_num1,int location_num2, int amount){
         location_num1-=1;
         location_num2-=1;
-        System.out.println(String.format("%d %d", location_num1,location_num2));
+        // System.out.println(String.format("%d %d", location_num1,location_num2));
         if (location_num1>=this.num_locations |location_num2>=this.num_locations | location_num1<0 |location_num2<0){
             return false;
         }
@@ -299,6 +299,7 @@ class ManageConservationist {
 
     public void run_simulation() {
         boolean continue_simulate =true;
+        String descision="y";
         for (Location Location : this.list_locations) {
             Location.init_animal();
         }
@@ -323,7 +324,6 @@ class ManageConservationist {
                 }
             }
 
-            String descision=InputValidator.get_input("^(y|Y|n|N)$","Continue simulation (Y-N)? ").toLowerCase();
  
             if (descision.toLowerCase().equals("n")){
                 continue_simulate=false;
@@ -358,6 +358,8 @@ class ManageConservationist {
                 break;
             }
             this.limit_bilby();
+            descision=InputValidator.get_input("^(y|Y|n|N)$","Continue simulation (Y-N)? ").toLowerCase();
+
         }
     }
 

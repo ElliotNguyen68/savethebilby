@@ -176,6 +176,8 @@ class Location {
             this.generate_new_animal("Fox", num_new_fox);
             this.born_fox+=num_new_fox;
         }
+        System.out.println(String.format("Location %d, new born bilby %d, new born cat %d, new born fox %d", this.location_number,num_new_bilby,num_new_cat,num_new_fox));
+
     }
 
     public void predator_hunting() {
@@ -202,6 +204,7 @@ class Location {
         }
         // if number of bilby got ate > 0, go to list bilby, kill these bilby
         if (num_eat_bilby > 0) {
+            System.out.println(String.format("Num death bilby: %d",num_eat_bilby));
             for (Animal bilby : this.list_bilby) {
                 if (bilby.is_alive) {
                     bilby.is_alive = false;
@@ -218,9 +221,23 @@ class Location {
         ArrayList<Animal> list_predator = new ArrayList<>();
         list_predator.addAll(this.list_cat);
         list_predator.addAll(this.list_fox);
+    
+        int num_die_cat=0;
+        int num_die_fox=0;
+
         for (Animal animal : list_predator) {
             ((Predator)animal).update_health(false);
+            if (((Predator)animal).health==0){
+                if (((Predator)animal).type=="Cat"){
+                    num_die_cat+=1;
+                }
+                else{
+                    num_die_fox+=1;
+                }
+            }
         }
+        System.out.println(String.format("Num death cat: %d", num_die_cat));
+        System.out.println(String.format("Num death fox: %d", num_die_fox));
     }
 
     public void one_month_process() {
