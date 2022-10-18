@@ -12,7 +12,6 @@ class SaveTheBilby {
     }
     public static void main(String[] args) {
         welcome();
-        // System.out.println("df");
         int count_line=0;
         try
         {
