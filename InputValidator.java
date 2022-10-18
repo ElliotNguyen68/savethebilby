@@ -30,6 +30,7 @@ class InputValidator {
                 check=true;
             }
         }
+        // scanner.close();
         return input;
     }
 

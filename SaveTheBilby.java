@@ -12,7 +12,7 @@ class SaveTheBilby {
     }
     public static void main(String[] args) {
         welcome();
-        System.out.println("df");
+        // System.out.println("df");
         int count_line=0;
         try
         {
@@ -61,7 +61,7 @@ class SaveTheBilby {
                     manage_conservation.add_location_info(Integer.parseInt(info_this_zone.get( 0)), Integer.parseInt(info_this_zone.get(1)), Integer.parseInt(info_this_zone.get(2)),i);
                 }
 
-                System.out.println("End of file reached!");
+                // System.out.println("End of file reached!");
             }
             finally
             {

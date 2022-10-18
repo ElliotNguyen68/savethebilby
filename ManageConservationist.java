@@ -175,7 +175,7 @@ class ManageConservationist {
         valid_regex=valid_regex.substring(0, valid_regex.length()-1);
         valid_regex+=")$";
         // System.out.println(valid_regex);
-        int location=Integer.valueOf(InputValidator.get_input(valid_regex, "Enter location want to conduct interventory: ","This location already did interventory"));
+        int location=Integer.valueOf(InputValidator.get_input(valid_regex, "Enter location want to conduct interventory: ","Not a valid location"));
         
         this.list_locations[location-1].die_by_haft_predators();
         this.done_interventory_locations[location-1]=true;
@@ -215,8 +215,8 @@ class ManageConservationist {
                 else{
                     System.out.println("Statistic after relocate");
                     this.statistic();
-                    System.out.println("Done relocation, do you want to try another(Y-N) ? ");
-                    des=scanner.next().strip().toLowerCase();
+                    // System.out.println("");
+                    des=InputValidator.get_input("^(y|Y|n|N)$","Done relocation, do you want to try another(Y-N) ? ","Invalid input!");
                     if (des.equals("n")){
                         check=true;
                     } 
@@ -354,13 +354,13 @@ class ManageConservationist {
             
             }
             if (! continue_simulate){
-                this.finalize();
                 break;
             }
             this.limit_bilby();
             descision=InputValidator.get_input("^(y|Y|n|N)$","Continue simulation (Y-N)? ").toLowerCase();
 
         }
+        this.finalize();
     }
 
 }
