@@ -192,7 +192,9 @@ class ManageConservationist {
     public void show_born_dead_locations(){
         for (Location loc:this.list_locations){
             loc.show_born_dead();
+            System.out.println(String.format("Alive - bilby %d, cat: %d, fox: %d ",loc.num_bilby,loc.num_cat,loc.num_fox));
         }
+
     }
 
     /*
