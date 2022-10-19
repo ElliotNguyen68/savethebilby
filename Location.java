@@ -25,12 +25,29 @@ class Location {
     ArrayList<Animal> list_cat = new ArrayList<Animal>();
     ArrayList<Animal> list_fox = new ArrayList<Animal>();
 
+    private int death_this_month_bilby=0;
+    private int death_this_month_cat=0;
+    private int death_this_month_fox=0;
+
+    private int born_this_month_bilby=0;
+    private int born_this_month_cat=0;
+    private int born_this_month_fox=0;
     /*
      * @param num_bilby int
      * @param num_cat int
      * @param num_fox int
      * @param zone_number int
      */
+
+    private void reset_status(){
+        this.death_this_month_bilby=0;
+        this.death_this_month_fox=0;
+        this.death_this_month_cat=0;
+        this.born_this_month_fox=0 ;
+        this.born_this_month_bilby=0 ;
+        this.born_this_month_cat=0 ;
+    }
+
     public Location(int num_bilby, int num_cat, int num_fox, int zone_number) {
         // alive
         this.num_bilby = num_bilby;
@@ -176,8 +193,10 @@ class Location {
             this.generate_new_animal("Fox", num_new_fox);
             this.born_fox+=num_new_fox;
         }
-        System.out.println(String.format("Location %d, new born bilby %d, new born cat %d, new born fox %d", this.location_number+1,num_new_bilby,num_new_cat,num_new_fox));
-
+        // System.out.println(String.format("Location %d, new born bilby %d, new born cat %d, new born fox %d", this.location_number+1,num_new_bilby,num_new_cat,num_new_fox));
+        this.born_this_month_bilby=num_new_bilby;
+        this.born_this_month_cat=num_new_cat;
+        this.born_this_month_fox=num_new_fox;
     }
 
     public void predator_hunting() {
@@ -198,13 +217,13 @@ class Location {
                 if (num_eat_bilby < num_remain_bilby) {
                     num_eat_bilby += 1;
                     ((Predator) animal).update_health(true);
-
                 }
             }
         }
         // if number of bilby got ate > 0, go to list bilby, kill these bilby
+        // System.out.print(String.format("Num death bilby: %d, ",num_eat_bilby));
+        this.death_this_month_bilby+=num_eat_bilby;
         if (num_eat_bilby > 0) {
-            System.out.println(String.format("Num death bilby: %d",num_eat_bilby));
             for (Animal bilby : this.list_bilby) {
                 if (bilby.is_alive) {
                     bilby.is_alive = false;
@@ -236,11 +255,17 @@ class Location {
                 }
             }
         }
-        System.out.println(String.format("Num death cat: %d", num_die_cat));
-        System.out.println(String.format("Num death fox: %d", num_die_fox));
+        this.death_this_month_cat+=num_die_cat;
+        this.death_this_month_fox+=num_die_fox;
+        // System.out.print(String.format("num death cat: %d, ", num_die_cat));
+        // System.out.println(String.format("num death fox: %d", num_die_fox));
     }
 
     public void one_month_process() {
+        this.death_this_month_bilby=0;
+        this.death_this_month_cat=0;
+        this.death_this_month_fox=0;
+
         this.giving_birth();
         this.update_status();
         this.predator_hunting();
@@ -266,7 +291,14 @@ class Location {
         list_predator.addAll(this.list_fox);
         for (Animal animal : list_predator) {
             ((Predator)animal).die_by_haft();
-            
+            if (((Predator)animal).is_alive==false){
+                if (((Predator)animal).type=="Cat"){
+                    this.death_this_month_cat+=1;
+                } 
+                else{
+                    this.death_this_month_fox+=1;
+                }
+            }
         } 
     }
     
@@ -291,6 +323,12 @@ class Location {
             this.update_status();
         }
     }
+
+    public void show_born_dead(){
+        System.out.println(String.format("Location %d",this.location_number+1));
+        System.out.println(String.format("New born - bilby: %d, cat: %d, fox: %d",this.born_this_month_bilby,this.born_this_month_cat,this.born_this_month_fox));
+        System.out.println(String.format("New dead - bilby: %d, cat: %d, fox: %d",this.death_this_month_bilby,this.death_this_month_cat,this.death_this_month_fox));
+        }
 
     @Override
     public String toString() {

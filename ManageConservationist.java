@@ -11,6 +11,7 @@ class ManageConservationist {
     private int limit_bilby=20;
     public int total_bilby_start=0;
     private boolean done_interventory_locations[];
+    private int[][] previous_status;
 
     public ManageConservationist(){}
 
@@ -49,6 +50,7 @@ class ManageConservationist {
         this.num_locations = num_locations;
         list_locations = new Location[num_locations];
         done_interventory_locations=new boolean[num_locations];
+        this.previous_status=new int[num_locations][3];
     }
 
     public Location[] getList_locations() {
@@ -83,6 +85,9 @@ class ManageConservationist {
     public void add_location_info(int num_bilby, int num_cat, int num_fox, int location_number) {
         this.list_locations[location_number] = new Location(num_bilby, num_cat, num_fox, location_number);
         this.total_bilby_start+=num_bilby;
+        this.previous_status[location_number][0]=num_bilby;
+        this.previous_status[location_number][1]=num_cat;
+        this.previous_status[location_number][2]=num_fox;
     }
 
     /*
@@ -183,6 +188,11 @@ class ManageConservationist {
         System.out.println("Statistc after interventory: ");
          
         this.statistic();
+    }
+    public void show_born_dead_locations(){
+        for (Location loc:this.list_locations){
+            loc.show_born_dead();
+        }
     }
 
     /*
@@ -349,13 +359,11 @@ class ManageConservationist {
                         System.out.println("Not a valid input");
                     }
                 }
-            }
-                    
+            }                 
             this.limit_bilby();
-
+            this.show_born_dead_locations();
         }
         this.finalize();
     }
 
 }
-
