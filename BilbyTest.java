@@ -13,7 +13,7 @@ public class BilbyTest {
         System.out.println(b2); 
     }
     
-    private void test_get_method() {
+    private void test_get_set_valid_method() {
         System.out.println("Create a Bilby object with the default constructor");
         Bilby b1=new Bilby();
         System.out.println(b1);
@@ -90,7 +90,7 @@ public class BilbyTest {
         // test positive
         bilby.test_create_by_default();
         bilby.test_create_by_non_default();
-        bilby.test_get_method();
+        bilby.test_get_set_valid_method();
         // test nagative
         bilby.test_nagative_create_by_invalid_non_default();
         bilby.test_nagative_set();

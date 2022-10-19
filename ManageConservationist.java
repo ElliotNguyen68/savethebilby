@@ -309,6 +309,11 @@ class ManageConservationist {
         this.statistic();
 
         for (int k = 0; k < 12; k++) {
+            descision=InputValidator.get_input("^(y|Y|n|N)$","Continue simulation (Y-N)? ").toLowerCase();
+            if (descision.toLowerCase().equals("n")){
+                break;
+            }
+           
             for (int i = 0; i < this.num_locations; i++) {
                 Location Location = this.list_locations[i];
                 Location.one_month_process();
@@ -323,41 +328,30 @@ class ManageConservationist {
                     System.out.println(String.format("WARNING: Location %d have %d bilbies which is excess limit(%d)", i+1,Location.num_bilby,this.limit_bilby));
                 }
             }
-
- 
-            if (descision.toLowerCase().equals("n")){
-                continue_simulate=false;
-            }
-            else{
-                boolean move_on=false;
-                while (! move_on){
-                    boolean valid_choice=false;
-                    while (! valid_choice){
-                        System.out.println("Select following options:");
-                        System.out.println("1.Relocate bilby between 2 location");
-                        System.out.println("2.Conduct interventory");
-                        System.out.println("3.Pass (move to next month)");
-                        int option=Integer.valueOf(InputValidator.get_input("^([1-3])$", "Your selection [1-3]: "));
-                        if (option==1 ||option==3 ||option==2){
-                            this.action_option(option);
-                            valid_choice=true;
-                            if (option==3){
-                                move_on=true;
-                            }
-                        }
-                        else{
-                            valid_choice=false;
-                            System.out.println("Not a valid input");
+            boolean move_on=false;
+            while (! move_on){
+                boolean valid_choice=false;
+                while (! valid_choice){
+                    System.out.println("Select following options:");
+                    System.out.println("1.Relocate bilby between 2 location");
+                    System.out.println("2.Conduct interventory");
+                    System.out.println("3.Pass (move to next month)");
+                    int option=Integer.valueOf(InputValidator.get_input("^([1-3])$", "Your selection [1-3]: "));
+                    if (option==1 ||option==3 ||option==2){
+                        this.action_option(option);
+                        valid_choice=true;
+                        if (option==3){
+                            move_on=true;
                         }
                     }
+                    else{
+                        valid_choice=false;
+                        System.out.println("Not a valid input");
+                    }
                 }
-            
             }
-            if (! continue_simulate){
-                break;
-            }
+                    
             this.limit_bilby();
-            descision=InputValidator.get_input("^(y|Y|n|N)$","Continue simulation (Y-N)? ").toLowerCase();
 
         }
         this.finalize();

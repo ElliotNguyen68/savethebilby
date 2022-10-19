@@ -176,7 +176,7 @@ class Location {
             this.generate_new_animal("Fox", num_new_fox);
             this.born_fox+=num_new_fox;
         }
-        System.out.println(String.format("Location %d, new born bilby %d, new born cat %d, new born fox %d", this.location_number,num_new_bilby,num_new_cat,num_new_fox));
+        System.out.println(String.format("Location %d, new born bilby %d, new born cat %d, new born fox %d", this.location_number+1,num_new_bilby,num_new_cat,num_new_fox));
 
     }
 
