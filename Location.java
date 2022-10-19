@@ -262,9 +262,7 @@ class Location {
     }
 
     public void one_month_process() {
-        this.death_this_month_bilby=0;
-        this.death_this_month_cat=0;
-        this.death_this_month_fox=0;
+        this.reset_status();
 
         this.giving_birth();
         this.update_status();
