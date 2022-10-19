@@ -193,6 +193,7 @@ class ManageConservationist {
         for (Location loc:this.list_locations){
             loc.show_born_dead();
             System.out.println(String.format("Alive - bilby %d, cat: %d, fox: %d ",loc.num_bilby,loc.num_cat,loc.num_fox));
+            System.out.println("");
         }
 
     }
@@ -325,14 +326,16 @@ class ManageConservationist {
             if (descision.toLowerCase().equals("n")){
                 break;
             }
-           
+            System.out.println(String.format("=========Month %d=========",k+1));
             for (int i = 0; i < this.num_locations; i++) {
                 Location Location = this.list_locations[i];
                 Location.one_month_process();
                 Location.update_status();
-                
             }
-            System.out.println(String.format("=========Month %d=========",k+1));
+            this.show_born_dead_locations();
+            System.out.println();
+            System.out.println(String.format("After simulation of month %d",k+1));
+
             this.statistic();
             for (int i = 0; i < this.num_locations; i++) {
                 Location Location = this.list_locations[i];
@@ -363,7 +366,7 @@ class ManageConservationist {
                 }
             }                 
             this.limit_bilby();
-            this.show_born_dead_locations();
+            // this.show_born_dead_locations();
         }
         this.finalize();
     }
