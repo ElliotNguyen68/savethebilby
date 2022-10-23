@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-class Zone {
-    int zone_number;
+/*
+* A mode Location
+*/
+class Location {
+    int location_number;
     int num_fox;
     int num_cat;
     int num_bilby;
@@ -23,12 +25,35 @@ class Zone {
     ArrayList<Animal> list_cat = new ArrayList<Animal>();
     ArrayList<Animal> list_fox = new ArrayList<Animal>();
 
-    public Zone(int num_bilby, int num_cat, int num_fox, int zone_number) {
+    private int death_this_month_bilby=0;
+    private int death_this_month_cat=0;
+    private int death_this_month_fox=0;
+
+    private int born_this_month_bilby=0;
+    private int born_this_month_cat=0;
+    private int born_this_month_fox=0;
+    /*
+     * @param num_bilby int
+     * @param num_cat int
+     * @param num_fox int
+     * @param zone_number int
+     */
+
+    private void reset_status(){
+        this.death_this_month_bilby=0;
+        this.death_this_month_fox=0;
+        this.death_this_month_cat=0;
+        this.born_this_month_fox=0 ;
+        this.born_this_month_bilby=0 ;
+        this.born_this_month_cat=0 ;
+    }
+
+    public Location(int num_bilby, int num_cat, int num_fox, int zone_number) {
         // alive
         this.num_bilby = num_bilby;
         this.num_fox = num_fox;
         this.num_cat = num_cat;
-        this.zone_number = zone_number;
+        this.location_number = zone_number;
         
         // dead
         this.dead_bilby = num_bilby;
@@ -106,7 +131,11 @@ class Zone {
         // check remain bilby in zone
         return this.num_bilby > 0;
     }
-
+    
+    /*
+     * @param type String
+     * @param number int
+     */
     public void generate_new_animal(String type, int number) {
         // Given animal type, with a number of new one, add new #number animals of type to list animal of this zone.
         ArrayList<Animal> tmp ;
@@ -164,6 +193,10 @@ class Zone {
             this.generate_new_animal("Fox", num_new_fox);
             this.born_fox+=num_new_fox;
         }
+        // System.out.println(String.format("Location %d, new born bilby %d, new born cat %d, new born fox %d", this.location_number+1,num_new_bilby,num_new_cat,num_new_fox));
+        this.born_this_month_bilby=num_new_bilby;
+        this.born_this_month_cat=num_new_cat;
+        this.born_this_month_fox=num_new_fox;
     }
 
     public void predator_hunting() {
@@ -184,11 +217,12 @@ class Zone {
                 if (num_eat_bilby < num_remain_bilby) {
                     num_eat_bilby += 1;
                     ((Predator) animal).update_health(true);
-
                 }
             }
         }
         // if number of bilby got ate > 0, go to list bilby, kill these bilby
+        // System.out.print(String.format("Num death bilby: %d, ",num_eat_bilby));
+        this.death_this_month_bilby+=num_eat_bilby;
         if (num_eat_bilby > 0) {
             for (Animal bilby : this.list_bilby) {
                 if (bilby.is_alive) {
@@ -206,13 +240,30 @@ class Zone {
         ArrayList<Animal> list_predator = new ArrayList<>();
         list_predator.addAll(this.list_cat);
         list_predator.addAll(this.list_fox);
+    
+        int num_die_cat=0;
+        int num_die_fox=0;
+
         for (Animal animal : list_predator) {
             ((Predator)animal).update_health(false);
+            if (((Predator)animal).health==0){
+                if (((Predator)animal).type=="Cat"){
+                    num_die_cat+=1;
+                }
+                else{
+                    num_die_fox+=1;
+                }
+            }
         }
+        this.death_this_month_cat+=num_die_cat;
+        this.death_this_month_fox+=num_die_fox;
+        // System.out.print(String.format("num death cat: %d, ", num_die_cat));
+        // System.out.println(String.format("num death fox: %d", num_die_fox));
     }
 
     public void one_month_process() {
-        // System.out.println("dafs");
+        this.reset_status();
+
         this.giving_birth();
         this.update_status();
         this.predator_hunting();
@@ -238,10 +289,20 @@ class Zone {
         list_predator.addAll(this.list_fox);
         for (Animal animal : list_predator) {
             ((Predator)animal).die_by_haft();
-            
+            if (((Predator)animal).is_alive==false){
+                if (((Predator)animal).type=="Cat"){
+                    this.death_this_month_cat+=1;
+                } 
+                else{
+                    this.death_this_month_fox+=1;
+                }
+            }
         } 
     }
     
+    /*
+     * @param lim_bilby int
+     */
     public void limit_bilby(int lim_bilby){
         this.update_status();
 
@@ -256,7 +317,19 @@ class Zone {
                     break;
                 }
             }
+            System.out.println(String.format("All %d excess bilbies in location %d  have died", this.num_bilby-lim_bilby,this.location_number+1));
             this.update_status();
         }
+    }
+
+    public void show_born_dead(){
+        System.out.println(String.format("Location %d",this.location_number+1));
+        System.out.println(String.format("New born - bilby: %d, cat: %d, fox: %d",this.born_this_month_bilby,this.born_this_month_cat,this.born_this_month_fox));
+        System.out.println(String.format("New dead - bilby: %d, cat: %d, fox: %d",this.death_this_month_bilby,this.death_this_month_cat,this.death_this_month_fox));
+        }
+
+    @Override
+    public String toString() {
+        return String.format("Location %d, bilby: %d, cat: %d, fox: %d", this.location_number+1,this.num_bilby,this.num_cat,this.num_fox);
     }
 }

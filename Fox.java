@@ -4,7 +4,17 @@ public class Fox extends Predator{
     public Fox(){
         super("Fox");
     }
+    
+    public void setId(String id){
+        assert check_id(id,"^F[0-9]{3}$"):"Invalid id";
+        this.id=id;
+    }
 
+
+    /*
+     * @param giving_birth_prob douple
+     * @param eat_prob douple
+     */
     public Fox(double giving_birth_prob,double eat_prob){
         super("Fox",giving_birth_prob,eat_prob);
     }
@@ -13,18 +23,5 @@ public class Fox extends Predator{
     public String toString() {
         return (String.format("Fox, id: %s, is_alive: %b, health: %d", this.id, this.is_alive,
                 this.health));
-    }
-
-    public static void main(String[] args) {
-        Fox f1=new Fox();
-        System.out.println(f1);
-        Fox f2=new Fox(0.1,0.2);
-        System.out.println(f2);
-        try {
-            Fox f3=new Fox(1.1,3.1);
-        } catch (AssertionError e) {
-            System.out.println("Fail to init");
-            // TODO: handle exception
-        }
     }
 }
